@@ -1,0 +1,41 @@
+body {
+    background-color: rgb(54, 53, 57);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+}
+
+figcaption {
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+}
+
+.section {
+    display: flexbox;
+    flex-direction: column;
+    justify-content: center;
+}
+
+button {
+    border-radius: 20px;
+    background-color: rgb(87, 87, 87);
+    color:rgb(255, 255, 255);
+    font-size: 14px;
+}
+
+input {
+    border-radius: 15px;
+    font-size: medium;
+}
+
+img {
+    display: block;
+    margin: auto;
+    height: 300px;
+    width: 300px;
+}
+
+#descricao {
+    background-color: rgb(255, 255, 255);
+    border-radius: 30px;
+    text-align: center;
+}
