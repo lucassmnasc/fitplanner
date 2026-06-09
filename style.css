@@ -10,7 +10,7 @@ figcaption {
 }
 
 .section {
-    display: flexbox;
+    display: flex;
     flex-direction: column;
     justify-content: center;
 }
