@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Gerenciador de Treinos</title>
+    <title>Gerenciador de Treinos - FitPlanner</title>
     <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
     <link rel="stylesheet" href="style.css">
     <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
@@ -12,17 +12,26 @@
         <img src="https://cdn.discordapp.com/attachments/1478819142395236354/1506021838042431611/Academia_FitPlanner.png?ex=6a0cbfa2&is=6a0b6e22&hm=d7318ace8a1d78e27c025057c43984b97c84f8b901c0f2601f19194faf46ae7a">
         <main id="descricao">
             <figcaption><strong>FitPlanner: A Revolução no Planejamento de Treinos</strong></figcaption>
-        <figcaption>Imagine um ecossistema que pensa, adapta e evolui junto com o seu corpo. O FitPlanner não é apenas mais um aplicativo de treino ou uma planilha digital; ele é um sistema revolucionário de gestão e planejamento fitness, projetado para extinguir de vez o "achismo" das salas de musculação.
-        Criado para integrar alunos, personal trainers e a gestão da academia em uma única plataforma ultra-inteligente, o FitPlanner transforma metas abstratas em caminhos matematicamente otimizados para o sucesso.</figcaption>
+            <figcaption>Imagine um ecossistema que pensa, adapta e evolui junto com o seu corpo. O FitPlanner não é apenas mais um aplicativo de treino ou uma planilha digital; ele é um sistema revolucionário de gestão e planejamento fitness, projetado para extinguir de vez o "achismo" das salas de musculação.
+            Criado para integrar alunos, personal trainers e a gestão da academia em uma única plataforma ultra-inteligente, o FitPlanner transforma metas abstratas in caminhos matematicamente otimizados para o sucesso.</figcaption>
         </main>
     </figure>
 
     <div class="section">
-        <h2>Adicionar Treino</h2>
-        <input type="text" id="nome" placeholder="Nome do treino">
-        <input type="text" id="tipo" placeholder="Tipo de treino">
-        <input type="text" id="exercicios" placeholder="Exercícios (Ex: Supino: 12 repetições, Agachamento: 10 repetições)">
-        <button onclick="window.adicionar_click()">Adicionar</button>
+        <h2>Adicionar Treino e Configuração de Exercício</h2>
+        <div class="input-group">
+            <h3>Dados do Treino</h3>
+            <input type="text" id="nome" placeholder="Nome do treino (Ex: Treino A)">
+            <input type="text" id="tipo" placeholder="Tipo de treino (Ex: Peito e Tríceps)">
+        </div>
+        <div class="input-group">
+            <h3>Dados do Exercício</h3>
+            <input type="text" id="ex_nome" placeholder="Nome do exercício">
+            <input type="number" id="ex_series" placeholder="Quantidade de séries">
+            <input type="number" id="ex_reps" placeholder="Quantidade de repetições">
+            <input type="number" id="ex_carga" placeholder="Carga utilizada (kg)">
+        </div>
+        <button onclick="window.adicionar_click()">Salvar Treino Completo</button>
     </div>
 
     <div class="section">
@@ -52,12 +61,19 @@
     </div>
 
     <div class="section">
+        <h2>Sistemas Avançados Python</h2>
+        <button onclick="window.py_calcular_calorias()">Calcular Total de Calorias</button>
+        <button onclick="window.py_treino_recomendo('SUPERIORES')">Recomendado Superiores</button>
+        <button onclick="window.py_treino_recomendo('INFERIORES')">Recomendado Inferiores</button>
+        <button onclick="window.py_limpar_tudo()">Zerar Todos os Dados</button>
+    </div>
+
+    <div class="section">
         <h2>Painel de Saída</h2>
-        <div id="output">Atualizações aparecerão aqui...</div>
+        <div id="output">As atualizações do sistema aparecerão aqui...</div>
     </div>
 
     <script src="app.js"></script>
-
     <script type="py" src="app.py"></script>
 
     <script>
