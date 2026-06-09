@@ -14,7 +14,8 @@ def adicionar():    #CREATE
             exf = input(f"qual o exercicio {i+1}: ")
             ser = int(input(f"quantas series terá o exercicio {i+1}:"))
             rep = int(input(f"quantas repetições terá o exercicio {i+1}:"))
-            dados_treino += f"[{exf}: {ser} ser X {rep} rep] "
+            carga = int(input(f"Qual a carga utilizada no exercício?"))
+            dados_treino += f"[{exf}: {ser} ser X {rep} rep: {carga}] "
         
 
         calorias_ex = (ser*ex)*50
@@ -28,7 +29,7 @@ def adicionar():    #CREATE
     except ValueError:
         print("Erro: digite um número válido para a quantidade de exercícios ou repetições.")
 
-
+        
 def listar():   #READ
     try:
         arquivo = open('treino.txt', 'r')
@@ -66,14 +67,14 @@ def atualizar():  # UPDATE
                 nome = input("Nome do treino: ")
                 tipo = input("Tipo de treino: ")
                 ex = int(input(f"Quantos exercícios terá o treino {nome}?: "))
-
                 dados_treino = f"Treino: {nome} | Tipo: {tipo} | Exercícios: "
 
                 for j in range(ex):
                     exf = input(f"Qual o exercício {j+1}: ")
                     ser = int(input(f"quantas series terá o exercicio {i+1}:"))
                     rep = int(input(f"Quantas repetições terá o exercício {j+1}: "))
-                    dados_treino += f"[{exf}: {ser} ser X {rep} rep] "
+                    nova_carga = int(input("Digite a carga que deseja atualizar: "))
+                    dados_treino += f"[{exf}: {ser} ser X {rep} rep: carga: {nova_carga}] "
 
                 treinos[i] = dados_treino + "\n"
                 encontrado = True
@@ -96,7 +97,6 @@ def atualizar():  # UPDATE
         print("Erro: digite um número válido para a quantidade de exercícios ou repetições.")
     except FileNotFoundError:
         print("Nenhum arquivo encontrado!")
-
 
 def treino_recomendado():
         print("TIPOS DE TREINO\nSUPERIORES\nINFERIORES")
