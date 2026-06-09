@@ -15,6 +15,10 @@ def adicionar():    #CREATE
             ser = int(input(f"quantas series terá o exercicio {i+1}:"))
             rep = int(input(f"quantas repetições terá o exercicio {i+1}:"))
             dados_treino += f"[{exf}: {ser} ser X {rep} rep] "
+        
+
+        calorias_ex = (ser*ex)*50
+        dados_treino += f"| Calorias estimadas: {calorias_ex} kcal"
 
         with open('treino.txt', 'a') as arquivo:
             arquivo.write(dados_treino + '\n')
@@ -233,7 +237,20 @@ def metas():
         print("Erro: digite um número válido para escolher a ação.")
     except FileNotFoundError:
         print("Nenhum treino encontrado!")
-
+def calcular_calorias():
+    try:
+        with open('treino.txt', 'r') as arquivo:
+            linhas = arquivo.readlines()
+            total_calorias = 0
+            for linha in linhas:
+                partes = linha.split('|')
+                for p in partes:
+                    if "kcal" in p:
+                        valor_calorias = float(p.replace("kcal", "").strip())
+                        total_calorias += valor_calorias
+            print(f"Total de calorias gastas: {total_calorias} kcal")
+    except FileNotFoundError:
+        print("Nenhum treino encontrado para se calcular as calorias gastas!")
 
 while True:
     try:
