@@ -1,73 +1,121 @@
 body {
-    background-color: rgb(54, 53, 57);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white;
-    padding: 20px;
-    max-width: 700px;
-    margin: 0 auto;
+    background-color: #0d0d0d;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 30px;
 }
 
-figcaption {
-    color: rgb(0, 0, 0);
-    font-size: 20px;
-}
-
-.section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: rgb(68, 67, 72);
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 15px;
-}
-
-.section h2 {
-    margin-top: 0;
-    font-size: 18px;
-    border-bottom: 1px solid #575757;
-    padding-bottom: 5px;
-}
-
-button {
-    border-radius: 20px;
-    background-color: rgb(87, 87, 87);
-    color: rgb(255, 255, 255);
-    font-size: 14px;
+figure {
+    background-color: transparent;
     padding: 10px;
-    margin-top: 10px;
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-button:hover {
-    background-color: rgb(110, 110, 110);
-}
-
-input, select {
-    border-radius: 10px;
-    font-size: medium;
-    padding: 8px;
-    margin-top: 8px;
-    border: 1px solid #575757;
-    background-color: #fff;
-    color: #000;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 img {
-    display: block;
-    margin: auto;
-    height: 150px;
-    width: 150px;
-    object-fit: contain;
+    max-width: 160px;
+    border-radius: 50%;
+    margin-bottom: 15px;
 }
 
-#descricao {
-    background-color: rgb(255, 255, 255);
-    border-radius: 20px;
-    text-align: center;
-    margin-top: 15px;
-    margin-bottom: 25px;
+figcaption strong {
+    color: #00ff66;
+    font-size: 1.4em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+#descricao figcaption {
+    max-width: 800px;
+    margin: 0 auto 10px auto;
+    line-height: 1.6;
+    font-size: 1em;
+    color: #b3b3b3;
+}
+
+.section {
+    background-color: #141414;
+    border: 1px solid #262626;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.section h2 {
+    color: #00ff66;
+    margin-top: 0;
+    border-bottom: 1px solid #262626;
+    padding-bottom: 10px;
+    font-size: 1.3em;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 6px;
+    border-left: 3px solid #00ff66;
+}
+
+.input-group h3 {
+    margin: 0 0 10px 5px;
+    font-size: 0.95em;
+    color: #b3b3b3;
+    text-transform: uppercase;
+}
+
+input, select {
     padding: 10px;
+    margin: 6px;
+    background-color: #0d0d0d;
+    border: 1px solid #404040;
+    color: #ffffff;
+    border-radius: 5px;
+    width: calc(25% - 16px);
+    min-width: 200px;
+    font-size: 0.9em;
+}
+
+input:focus, select:focus {
+    border-color: #00ff66;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 255, 102, 0.5);
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #00ff66;
+    color: #000000;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    margin: 4px;
+}
+
+button:hover {
+    background-color: #00cc52;
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
+    transform: translateY(-1px);
+}
+
+#output {
+    background-color: #050505;
+    color: #00ff66;
+    padding: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre-wrap;
+    border: 1px solid #262626;
+    border-left: 5px solid #00ff66;
+    border-radius: 6px;
+}
+
+label {
+    color: #b3b3b3;
+    font-size: 0.9em;
+    margin-left: 5px;
 }
