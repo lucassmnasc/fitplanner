@@ -14,7 +14,7 @@ def adicionar():    #CREATE
             exf = input(f"qual o exercicio {i+1}: ")
             ser = int(input(f"quantas series terá o exercicio {i+1}:"))
             rep = int(input(f"quantas repetições terá o exercicio {i+1}:"))
-            dados_treino += f"[{exf}: {ser}ser X {rep} rep] "
+            dados_treino += f"[{exf}: {ser} ser X {rep} rep] "
 
         with open('treino.txt', 'a') as arquivo:
             arquivo.write(dados_treino + '\n')
@@ -69,7 +69,7 @@ def atualizar():  # UPDATE
                     exf = input(f"Qual o exercício {j+1}: ")
                     ser = int(input(f"quantas series terá o exercicio {i+1}:"))
                     rep = int(input(f"Quantas repetições terá o exercício {j+1}: "))
-                    dados_treino += f"[{exf}: {ser}ser X {rep} rep] "
+                    dados_treino += f"[{exf}: {ser} ser X {rep} rep] "
 
                 treinos[i] = dados_treino + "\n"
                 encontrado = True
