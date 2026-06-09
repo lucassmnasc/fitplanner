@@ -1,115 +1,161 @@
 # GRUPO 8: Matheus Trajano de Freitas, Luiz Henrique de Andrade Rodrigues, Mariana de Melquiades Melo, Lucas Silva Moreira do Nascimento, Arthur Santana de Andrade e Ricardo Amorim Bayma
 
-import os
 import js
 
-def print(texto):
-    div = js.document.getElementById("output")
-    if div:
-        div.innerText = div.innerText + "\n" + str(texto) if div.innerText and div.innerText != "Atualizações aparecerão aqui..." else str(texto)
+def py_treino_js():
+    conteudo = js.localStorage.getItem('treino_txt')
+    if conteudo is None:
+        return ""
+    return conteudo
 
-def meu_input(prompt_text=""):
-    val = js.prompt(prompt_text)
-    return val if val is not None else ""
+def adicionar():
+    try:
+        nome = js.document.getElementById("nome").value
+        tipo = js.document.getElementById("tipo").value
+        exf = js.document.getElementById("ex_nome").value
+        ser = int(js.document.getElementById("ex_series").value)
+        rep = int(js.document.getElementById("ex_reps").value)
+        carga = int(js.document.getElementById("ex_carga").value)
 
-def adicionar(event=None):
-    nome = js.document.getElementById("nome").value
-    tipo = js.document.getElementById("tipo").value
-    exercicios_raw = js.document.getElementById("exercicios").value
+        dados_treino = f"Treino: {nome} | Tipo: {tipo} | Exercícios: "
+        dados_treino += f"[{exf}: {ser} ser X {rep} rep: {carga}] "
 
-    if not nome or not tipo or not exercicios_raw:
-        print("Preencha todos os campos antes de adicionar!")
+        calorias_ex = (ser * 1) * 50
+        dados_treino += f"| Calorias estimadas: {calorias_ex} kcal"
+
+        conteudo_atual = py_treino_js()
+        novo_conteudo = conteudo_atual + dados_treino + '\n'
+        
+        js.localStorage.setItem('treino_txt', novo_conteudo)
+        js.exibirNoOutput("Treino e Exercício armazenados com sucesso!")
+        js.atualizarDropdowns()
+        
+    except ValueError:
+        js.exibirNoOutput("Erro: Digite números válidos para Séries, Repetições e Carga.")
+    except Exception:
+        js.exibirNoOutput("Erro inesperado ao salvar os dados.")
+
+def listar():
+    conteudo = py_treino_js()
+    if not conteudo.strip():
+        js.exibirNoOutput('Nenhum treino foi cadastrado ainda.')
         return
 
-    dados_treino = f"Treino: {nome} | Tipo: {tipo} | Exercícios: {exercicios_raw}"
-
-    with open('treino.txt', 'a') as arquivo:
-        arquivo.write(dados_treino + '\n')
-
-    js.document.getElementById("nome").value = ""
-    js.document.getElementById("tipo").value = ""
-    js.document.getElementById("exercicios").value = ""
-
-    print(f"Treino '{nome}' adicionado com sucesso! :D")
-
-def listar(event=None):
-    if not os.path.exists('treino.txt'):
-        print('Ainda não há treinos cadastrados! :(')
-        return
-
-    with open('treino.txt', 'r') as arquivo:
-        linhas = arquivo.readlines()
-
-    if len(linhas) == 0:
-        print('Ainda não há treinos cadastrados! :(')
-    else:
-        print('Lista de Treinos')
-        for linha in linhas:
-            print(linha.strip())
+    treinos = conteudo.split('\n')
+    js.exibirNoOutput('Listar treino:')
+    for treino in treinos:
+        if treino.strip():
+            js.exibirNoOutput(treino.strip())
 
 def atualizar(treino_antigo, treino_novo):
-    if not os.path.exists('treino.txt'):
-        print('Arquivo não encontrado.')
-        return
+    conteudo = py_treino_js()
+    treinos = conteudo.split('\n')
 
-    with open('treino.txt', 'r') as arquivo:
-        linhas = arquivo.readlines()
+    if "Exercícios:" in treino_novo and "kcal" not in treino_novo:
+        qtd_exercicios = treino_novo.count('[')
+        if qtd_exercicios == 0:
+            qtd_exercicios = 1
+            
+        calorias_atualizadas = (3 * qtd_exercicios) * 50
+        treino_novo += f" | Calorias estimadas: {calorias_atualizadas} kcal"
 
-    for i in range(len(linhas)):
-        if linhas[i].strip() == treino_antigo:
-            linhas[i] = treino_novo + '\n'
-            with open('treino.txt', 'w') as arquivo:
-                arquivo.writelines(linhas)
-            print("Treino atualizado com sucesso!")
-            return
+    encontrado = False
+    for i in range(len(treinos)):
+        if treinos[i].strip() == treino_antigo.strip():
+            treinos[i] = treino_novo
+            encontrado = True
+            break
 
-    print('Treino não encontrado.')
+    if encontrado:
+        novo_conteudo = '\n'.join(treinos)
+        js.localStorage.setItem('treino_txt', novo_conteudo)
+        js.exibirNoOutput("Treino atualizado e calorias recalculadas!")
+        js.atualizarDropdowns()
+    else:
+        js.exibirNoOutput("Treino não encontrado para atualização.")
 
 def excluir(treino_alvo):
-    if not os.path.exists('treino.txt'):
-        print('Arquivo não encontrado.')
-        return
+    conteudo = py_treino_js()
+    treinos = conteudo.split('\n')
 
-    with open('treino.txt', 'r') as arquivo:
-        linhas = arquivo.readlines()
+    encontrado = False
+    for i in range(len(treinos)):
+        if treinos[i].strip() == treino_alvo.strip():
+            treinos.pop(i)
+            encontrado = True
+            break
 
-    novas_linhas = [l for l in linhas if l.strip() != treino_alvo]
+    if encontrado:
+        novo_conteudo = '\n'.join(treinos)
+        js.localStorage.setItem('treino_txt', novo_conteudo)
+        js.exibirNoOutput('Treino removido com sucesso!')
+        js.atualizarDropdowns()
+    else:
+        js.exibirNoOutput('Treino não encontrado!')
 
-    if len(novas_linhas) == len(linhas):
-        print('Treino não encontrado.')
-        return
+def treino_recomendado_python(tipo_treino):
+    tipo = tipo_treino.upper()
+    dados_treino = ""
+    
+    if tipo == "SUPERIORES":
+        superiores = [
+            {"exercicio": "Supino Reto","series": 3, "reps":"8-12"},
+            {"exercicio": "Triceps Corda","series": 3, "reps":"8-12"},
+            {"exercicio": "Puxada Frontal","series": 3, "reps":"8-12"}
+        ]
+        dados_treino = f"Treino: Recomendado do Sistema | Tipo: {tipo} | Exercícios: "
+        for i in superiores:
+            dados_treino += f"[{i['exercicio']}: {i['series']} ser X {i['reps']} rep: 0] "
+            
+        qtd_exercicios = len(superiores)
+        calorias_rec = (3 * qtd_exercicios) * 50
+        dados_treino += f"| Calorias estimadas: {calorias_rec} kcal"
+                
+    elif tipo == "INFERIORES":
+        inferiores = [
+            {"exercicio": "Agachamento livre","series": 3, "reps":"8-12"},
+            {"exercicio": "Leg press","series": 3, "reps":"8-12"},
+            {"exercicio": "Mesa flexora","series": 3, "reps":"8-12"}
+        ]
+        dados_treino = f"Treino: Recomendado do Sistema | Tipo: {tipo} | Exercícios: "
+        for i in inferiores:
+            dados_treino += f"[{i['exercicio']}: {i['series']} ser X {i['reps']} rep: 0] "
 
-    with open('treino.txt', 'w') as arquivo:
-        arquivo.writelines(novas_linhas)
+        qtd_exercicios = len(inferiores)
+        calorias_rec = (3 * qtd_exercicios) * 50
+        dados_treino += f"| Calorias estimadas: {calorias_rec} kcal"
 
-    print('Treino removido com sucesso.')
+    if dados_treino != "":
+        conteudo_atual = py_treino_js()
+        js.localStorage.setItem('treino_txt', conteudo_atual + dados_treino + '\n')
+        js.exibirNoOutput(f"Treino recomendado de {tipo} adicionado com sucesso!")
+        js.atualizarDropdowns()
 
-def treino_js():
-    if not os.path.exists('treino.txt'):
-        open('treino.txt', 'w').close()
-    with open('treino.txt', 'r') as f:
-        return f.read()
+def calcular_calorias():
+    conteudo = py_treino_js()
+    linhas = conteudo.split('\n')
+    total_calorias = 0
+    
+    for linha in linhas:
+        partes = linha.split('|')
+        for p in partes:
+            if "kcal" in p:
+                valor_calorias = float(p.replace("kcal", "").replace("Calorias estimadas:", "").strip())
+                total_calorias += valor_calorias
+                
+    js.exibirNoOutput(f"Total de calorias acumuladas: {total_calorias} kcal")
 
-def adicionar_wrapper(event=None):
-    adicionar()
-    js.window.atualizarDropdowns()
+def limpar_tudo():
+    js.localStorage.removeItem('treino_txt')
+    js.exibirNoOutput("Dados do sistema resetados.")
+    js.atualizarDropdowns()
 
-def listar_wrapper(event=None):
-    listar()
 
-def atualizar_wrapper(treino_antigo, treino_novo):
-    atualizar(str(treino_antigo), str(treino_novo))
-    js.window.atualizarDropdowns()
-
-def excluir_wrapper(treino_param):
-    excluir(str(treino_param))
-    js.window.atualizarDropdowns()
-
-js.window.py_adicionar = adicionar_wrapper
-js.window.py_listar = listar_wrapper
-js.window.py_atualizar = atualizar_wrapper
-js.window.py_excluir = excluir_wrapper
-js.window.py_treino_js = treino_js
-
-if not os.path.exists('treino.txt'):
-    open('treino.txt', 'w').close()
+js.window.py_treino_js = py_treino_js
+js.window.py_adicionar = adicionar
+js.window.py_listar = listar
+js.window.py_atualizar = atualizar
+js.window.py_excluir = excluir
+js.window.py_treino_recomendo = treino_recomendado_python
+js.window.py_calcular_calorias = calcular_calorias
+js.window.py_limpar_tudo = limpar_tudo
