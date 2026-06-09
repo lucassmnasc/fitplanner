@@ -12,8 +12,9 @@ def adicionar():    #CREATE
 
         for i in range(ex):
             exf = input(f"qual o exercicio {i+1}: ")
+            ser = int(input(f"quantas series terá o exercicio {i+1}:"))
             rep = int(input(f"quantas repetições terá o exercicio {i+1}:"))
-            dados_treino += f"[{exf}: {rep} rep] "
+            dados_treino += f"[{exf}: {ser}ser X {rep} rep] "
 
         with open('treino.txt', 'a') as arquivo:
             arquivo.write(dados_treino + '\n')
@@ -22,10 +23,6 @@ def adicionar():    #CREATE
 
     except ValueError:
         print("Erro: digite um número válido para a quantidade de exercícios ou repetições.")
-    except PermissionError:
-        print("Erro: sem permissão para gravar no arquivo.")
-    except OSError as e:
-        print(f"Erro ao acessar o arquivo: {e}")
 
 
 def listar():   #READ
@@ -44,10 +41,6 @@ def listar():   #READ
 
     except FileNotFoundError:
         print("Nenhum treino encontrado!")
-    except PermissionError:
-        print("Erro: sem permissão para ler o arquivo.")
-    except OSError as e:
-        print(f"Erro ao acessar o arquivo: {e}")
 
 
 def atualizar():  # UPDATE
@@ -74,8 +67,9 @@ def atualizar():  # UPDATE
 
                 for j in range(ex):
                     exf = input(f"Qual o exercício {j+1}: ")
+                    ser = int(input(f"quantas series terá o exercicio {i+1}:"))
                     rep = int(input(f"Quantas repetições terá o exercício {j+1}: "))
-                    dados_treino += f"[{exf}: {rep} rep] "
+                    dados_treino += f"[{exf}: {ser}ser X {rep} rep] "
 
                 treinos[i] = dados_treino + "\n"
                 encontrado = True
@@ -98,14 +92,9 @@ def atualizar():  # UPDATE
         print("Erro: digite um número válido para a quantidade de exercícios ou repetições.")
     except FileNotFoundError:
         print("Nenhum arquivo encontrado!")
-    except PermissionError:
-        print("Erro: sem permissão para acessar o arquivo.")
-    except OSError as e:
-        print(f"Erro ao acessar o arquivo: {e}")
 
 
 def treino_recomendado():
-    try:
         print("TIPOS DE TREINO\nSUPERIORES\nINFERIORES")
         tipo = input("tipo de treino: ").upper()
         if tipo == "SUPERIORES":
@@ -158,10 +147,6 @@ def treino_recomendado():
         else:
             print("Tipo de treino inválido. Escolha SUPERIORES ou INFERIORES.")
 
-    except PermissionError:
-        print("Erro: sem permissão para gravar no arquivo.")
-    except OSError as e:
-        print(f"Erro ao acessar o arquivo: {e}")
 
 
 def excluir():       #DELETE
@@ -187,14 +172,10 @@ def excluir():       #DELETE
                 break
 
         if not encontrado:
-            print('Treino não encontrado.')
+            print('Treino não encontrado!')
 
     except FileNotFoundError:
-        print("Nenhum arquivo encontrado!")
-    except PermissionError:
-        print("Erro: sem permissão para acessar o arquivo.")
-    except OSError as e:
-        print(f"Erro ao acessar o arquivo: {e}")
+        print("Nenhum treino encontrado!")
 
 
 def metas():
@@ -251,11 +232,7 @@ def metas():
     except ValueError:
         print("Erro: digite um número válido para escolher a ação.")
     except FileNotFoundError:
-        print("Nenhum arquivo encontrado!")
-    except PermissionError:
-        print("Erro: sem permissão para acessar o arquivo.")
-    except OSError as e:
-        print(f"Erro ao acessar o arquivo: {e}")
+        print("Nenhum treino encontrado!")
 
 
 while True:
