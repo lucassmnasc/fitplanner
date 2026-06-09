@@ -17,11 +17,11 @@ O **FitPlanner** é um sistema de gerenciamento de treinos que permite ao usuár
 
 ## 🚀 Funcionalidades
 
-- ➕ **Adicionar treino** — cadastre nome, tipo e exercícios de um treino
-- 📋 **Listar treinos** — visualize todos os treinos salvos
-- ✏️ **Atualizar treino** — edite os dados de um treino existente
-- 🗑️ **Excluir treino** — remova um treino da lista
-- 💻 **Versão terminal** — interface via linha de comando com menu interativo
+- ➕ **Adicionar treino** — cadastre nome, tipo e exercícios de um treino;
+- 📋 **Listar treinos** — visualize todos os treinos salvos;
+- ✏️ **Atualizar treino** — edite os dados de um treino existente;
+- 🗑️ **Excluir treino** — remova um treino da lista;
+- 💻 **Versão terminal** — interface via linha de comando com menu interativo.
 
 ---
 
