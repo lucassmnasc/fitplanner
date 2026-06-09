@@ -17,12 +17,13 @@ O **FitPlanner** é um sistema de gerenciamento de treinos que permite ao usuár
 
 ## 🚀 Funcionalidades
 
-- ➕ **Adicionar treino** — cadastre nome, tipo e exercícios de um treino;
-- 📋 **Listar treinos** — visualize todos os treinos salvos;
-- ✏️ **Atualizar treino** — edite os dados de um treino existente;
-- 🗑️ **Excluir treino** — remova um treino da lista;
-- 💻 **Versão terminal** — interface via linha de comando com menu interativo.
-
+- ➕ **Adicionar treino** — Cadastre nome, tipo e detalhes do exercício (séries, repetições e carga);
+- 📋 **Listar treinos** — Visualize todos os treinos salvos no painel de saída;
+- ✏️ **Atualizar treino** — Edite os dados de um treino existente com recalculo automático de calorias;
+- 🗑️ **Excluir treino** — Remova treinos específicos do sistema através de menus seletores;
+- 🔥 **Cálculo de Gasto Calórico** — Sistema integrado que computa e acumula as calorias estimadas dos seus treinos;
+- 💡 **Treinos Recomendados** — Injeção automatizada de rotinas prontas para membros Superiores ou Inferiores;
+- 💻 **Versão Terminal** — Interface via linha de comando em Python puro com menu interativo e administração de metas.
 ---
 
 ## 🗂️ Estrutura do Projeto
@@ -94,12 +95,16 @@ python "app(terminal).py"
 
 ---
 
-## 📁 Armazenamento
+## 📁 Armazenamento e Persistência
 
-Os treinos são salvos localmente no arquivo **`treino.txt`**, criado automaticamente na primeira execução. Cada treino ocupa uma linha no seguinte formato:
+O sistema adota estratégias diferentes dependendo do ambiente de execução:
 
+- **Versão Web:** Os dados são persistidos no navegador do usuário utilizando a API do `localStorage` sob a chave `'treino_txt'`. Isso garante que seus treinos continuem lá mesmo após fechar a aba.
+- **Versão Terminal:** Os treinos são salvos localmente em um arquivo físico chamado **`treino.txt`**, gerado na mesma pasta do script.
+
+### Formato do Registro (Web):
 ```
-Treino: <nome> | Tipo: <tipo> | Exercícios: <exercício>: <repetições>, ...
+Treino: <Nome> | Tipo: <Tipo> | Exercícios: [<NomeEx>: <Séries> ser X <Reps> rep: <Carga>] | Calorias estimadas: <Valor> kcal
 ```
 
 ---
